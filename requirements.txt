@@ -1,0 +1,5 @@
+Django==1.6.5
+python-dateutil==2.2
+requests==2.3.0
+six==1.6.1
+wsgiref==0.1.2
