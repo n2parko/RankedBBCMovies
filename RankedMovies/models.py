@@ -9,4 +9,4 @@ class Movie(models.Model):
     image = models.URLField()
     vote_average = models.FloatField()
     vote_count = models.IntegerField()
-    date_added = models.DateTimeField()
+    timestamp_check = models.DateTimeField()
