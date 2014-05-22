@@ -21,7 +21,6 @@ def get_movies():
         episodes = json.get('episodes', None)
         if episodes:
             for episode in episodes:
-                print 'ss'
                 programme = episode['programme']
                 tmdb_info = get_tmdb_info(programme['title'])[0]
                 Movie.objects.get_or_create(
