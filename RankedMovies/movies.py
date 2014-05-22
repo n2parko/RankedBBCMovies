@@ -12,7 +12,7 @@ from RankedMovies.models import Movie
 
 def get_movies():
     last_movie = Movie.objects.last()
-    if last_movie and (datetime.utcnow().replace(tzinfo=utc) - last_movie.timestamp_check.replace(tzinfo=utc)) < timedelta(seconds=60):
+    if last_movie and (datetime.utcnow().replace(tzinfo=utc) - last_movie.timestamp_check.replace(tzinfo=utc)) < timedelta(minutes=30):
         Movie.objects.filter(pid=last_movie.pid).update(timestamp_check=datetime.utcnow().replace(tzinfo=utc))
         return None
     response = requests.get(settings.BBC_MOVIES_URL)
