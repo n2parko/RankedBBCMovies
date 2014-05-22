@@ -43,7 +43,7 @@
 
       <div class="starter-template">
         <h1>Movies on BBC iPlayer</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <p class="lead">A web app that pulls the current movies on BBC iPlayer<br> fetches ratings for those movies from the Movie database and presents it in a single page app.</p>
           {% for movie in object_list %}
               <h3>{{ movie.title }}</h3>
               <p>{{ movie.short_synopsis }}</p>
