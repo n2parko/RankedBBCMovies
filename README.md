@@ -10,6 +10,7 @@ pip install -r requirements.txt
 python manage.py syncdb (skip this step if you plan to use the given sqlite database)
 ```
 
+```
 ├── RankedBBCMovies
 │   ├── __init__.py
 │   ├── settings.py
@@ -30,3 +31,4 @@ python manage.py syncdb (skip this step if you plan to use the given sqlite data
     │   └── movie_list.html
     └── static
         └── main.css
+```
