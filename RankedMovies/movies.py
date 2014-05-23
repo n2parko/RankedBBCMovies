@@ -12,10 +12,23 @@ import dateutil.tz
 # every 60 minutes, based on a request, it will update the database
 # with new movies fetching information from tmdb using 'get_tmdb_info' function
 def get_movies():
-    last_movie = Movie.objects.last()
-    if last_movie and (datetime.utcnow().replace(tzinfo=utc) - last_movie.timestamp_check.replace(tzinfo=utc)) < timedelta(minutes=60):
-        Movie.objects.filter(pid=last_movie.pid).update(timestamp_check=datetime.utcnow().replace(tzinfo=utc))
+    # Note: when dealing with multiple occurring events this function
+    # needs to apply an 'optimistic locking' avoiding concurrent modifications.
+    # The Django ORM and transactions don't help on this matter. To solve this issue
+    # every Model should rely on a 'version' field that ensures an optimistic lock by checking
+    # that every modification to some sort of data has the same version as the database
+    # and every SQL UPDATE will increment the version number.
+
+    # In order to prevent multiple updates get the last timestamp available
+    last_movie = Movie.objects.order_by('-timestamp_check')[0]
+    # If last_movie is not None and the difference (in time) between the actual date
+    # and the last timestamp is less than 60 minutes, returns None
+    if last_movie and (datetime.utcnow().replace(tzinfo=utc) -
+                       last_movie.timestamp_check.replace(tzinfo=utc)) < timedelta(minutes=60):
         return None
+    # Otherwise it will update the timestamp_check of the last movie with the current datetime
+    # and starts the actual update
+    Movie.objects.filter(pid=last_movie.pid).update(timestamp_check=datetime.utcnow().replace(tzinfo=utc))
     response = requests.get(settings.BBC_MOVIES_URL)
     if response.status_code == 200:
         json = response.json()
