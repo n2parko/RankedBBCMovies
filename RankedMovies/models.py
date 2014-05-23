@@ -1,6 +1,9 @@
 from django.db import models
 
 
+# Movie is the model that will interface
+# with the database layer using the given
+# attributes as columns
 class Movie(models.Model):
     pid = models.TextField(unique=True)
     title = models.TextField()
