@@ -17,4 +17,4 @@ Run
 go run bbcmovies.go
 ```
 
-The server will at http://127.0.0.1:8080
+The server will listen at http://127.0.0.1:8080
