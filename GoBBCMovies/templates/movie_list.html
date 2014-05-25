@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/main.css">
+    <title>BBC iPlayer Ranked Movies</title>
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">BBC iPlayer Ranked Movies</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Movies on BBC iPlayer</h1>
+        <p class="lead">A web app that pulls the current movies on BBC iPlayer<br> fetches ratings for those movies from the Movie database and presents it in a single page app.</p>
+          {{range $index, $movie := .}}
+              <h3>{{ $movie.Title }}</h3>
+              <p>{{ $movie.ShortSynopsis }}</p>
+              <img src="{{ $movie.Image }}">
+              {{ if gt $movie.VoteAverage 0.0 }}
+                <p><b>Rank</b>: {{ $movie.VoteAverage }} <small>({{ $movie.VoteCount }}{{ if gt $movie.VoteCount 1.0 }} votes{{else}} vote{{end}})</small></p>
+              {{else}}
+                <p>Rank not available</p>
+              {{end}}
+          {{end}}
+      </div>
+
+    </div><!-- /.container -->
+</body>
+</html>
