@@ -9,7 +9,7 @@ class Movie(models.Model):
     title = models.TextField()
     short_synopsis = models.TextField()
     available_until = models.DateTimeField()
-    image = models.URLField()
+    image = models.URLField(null=True)
     vote_average = models.FloatField()
     vote_count = models.IntegerField()
     timestamp_check = models.DateTimeField(db_index=True)

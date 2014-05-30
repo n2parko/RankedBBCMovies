@@ -47,7 +47,7 @@
           {% for movie in object_list %}
               <h3>{{ movie.title }}</h3>
               <p>{{ movie.short_synopsis }}</p>
-              <img src="{{ movie.image }}">
+              {% if movie.image %}<img src="{{ movie.image }}">{% else %}<p>Image not available</p>{% endif %}
               {% if movie.vote_average > 0 %}
                 <p><b>Rank</b>: {{ movie.vote_average }} <small>({{ movie.vote_count }}{% if movie.vote_count > 1 %} votes{% else %} vote{% endif %}) </small></p>
               {% else %}
